@@ -1,0 +1,31 @@
+{
+  "name": "buffer-api",
+  "version": "0.0.4",
+  "description": "Node wrapper for the Buffer API.",
+  "main": "lib/buffer-api.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register -R spec",
+    "prepublish": "cake compile"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/colinscape/buffer-api.git"
+  },
+  "keywords": [
+    "buffer",
+    "api"
+  ],
+  "author": "Colin Ross <colin@colinscape.com> (http://colinscape.com)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "6084c493ccaab790647bf0cf9217a578cdfb76c7",
+  "dependencies": {
+    "request": "2.*.*"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "should": "~4.0.4",
+    "coffee-script": "~1.7.1",
+    "sinon": "~1.10.2"
+  }
+}
