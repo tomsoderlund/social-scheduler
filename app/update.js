@@ -9,8 +9,6 @@ var profiles = require('./controllers/profiles');
 var articles = require('./controllers/articles');
 var updates = require('./controllers/updates');
 
-
-var API_PASSWORD = process.env.SSS_PASSWORD;
 var QUEUE_LIMIT = 1;
 
 

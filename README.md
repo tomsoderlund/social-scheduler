@@ -19,6 +19,28 @@ Just start with:
 Server will default to **http://localhost:3009**
 
 
+## API
+
+List articles
+
+	curl http://localhost:3009/api/articles?password=MYPASSWORD
+
+Create new article:
+
+	curl -X POST -H "Content-Type: application/json" -d '{ ... }' http://localhost:3009/api/articles?password=MYPASSWORD
+
+Update article:
+
+	curl -X PUT -H "Content-Type: application/json" -d '{ ... }' http://localhost:3009/api/articles/548cbb2b1ad50708212193d8?password=MYPASSWORD
+
+Delete article:
+
+	curl -X DELETE http://localhost:3009/api/articles/5477a6f88906b9fc766c843e?password=MYPASSWORD
+
+Delete all articles:
+
+	curl -X DELETE http://localhost:3009/api/articles/ALL?password=MYPASSWORD
+
 
 ## Implementation
 

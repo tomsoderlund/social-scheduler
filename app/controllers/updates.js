@@ -8,6 +8,8 @@ var Update = mongoose.model('Update');
 var Buffer = require('../../modules/buffer-api/src/buffer-api');
 var buffer = new Buffer(process.env.BUFFER_ACCESS_TOKEN);
 
+var DEBUG_MODE = true;
+
 module.exports = {
 
 	makeUpdateFromArticle: function (profile, article) {
@@ -28,6 +30,7 @@ module.exports = {
 		var update = {};
 		update.articleId = article._id;
 		update.url = article.url;
+		update.category = article.category;
 		update.title = article.titles[Math.floor(Math.random() * article.titles.length)];
 		update.image = article.images[Math.floor(Math.random() * article.images.length)];
 		update.tags = article.tags;
@@ -53,36 +56,41 @@ module.exports = {
 		async.each(updates, function (update, cbEach) {
 			update.service = profile.service;
 
-			buffer.createUpdate(
-				{
-					profile_ids: [profile.bufferId],
-					text: update.text,
-					media: {
-						photo: update.image,
-						//thumbnail: 'https://pbs.twimg.com/media/CW0xoXbWsAA81ZG.jpg:large',
-						link: update.url,
-						picture: update.image,
-						title: update.title,
-						// description: ,
+			if (!DEBUG_MODE) {
+				// Not debug mode
+				buffer.createUpdate(
+					{
+						profile_ids: [profile.bufferId],
+						text: update.text,
+						media: {
+							photo: update.image,
+							//thumbnail: 'https://pbs.twimg.com/media/CW0xoXbWsAA81ZG.jpg:large',
+							link: update.url,
+							picture: update.image,
+							title: update.title,
+							// description: ,
+						},
+						now: false,
+						attachment: true,
+						// shorten: false,
+						// top: false,
+						// scheduled_at: null,
+						// retweet: false,
 					},
-					now: false,
-					attachment: true,
-					// shorten: false,
-					// top: false,
-					// scheduled_at: null,
-					// retweet: false,
-				},
-				function (errBuffer, results) {
-					if (!errBuffer) {
-						Update.create(update, cbEach);
+					function (errBuffer, results) {
+						if (!errBuffer) {
+							Update.create(update, cbEach);
+						}
+						else {
+							cbEach();
+						}
 					}
-					else {
-						cbEach();
-					}
-				}
-			);
-
-			//Update.create(update, cbEach);
+				);
+			}
+			else {
+				// Debug mode: just add to database
+				Update.create(update, cbEach);
+			}
 		},
 		callback)
 	},

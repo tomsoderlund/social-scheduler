@@ -10,6 +10,7 @@ var UpdateSchema = new Schema({
 	slug: { type: String, unique: false },
 	title: { type: String },
 	image: { type: String },
+	category: { type: String },
 	tags: [String],
 });
 
