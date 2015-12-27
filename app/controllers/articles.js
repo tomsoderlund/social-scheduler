@@ -26,6 +26,7 @@ module.exports = {
 		if (limit > 0) {
 			var sortOptions = {};
 			sortOptions['usage.' + profile.service + '.dateLastUpdate'] = 1;
+			sortOptions.randomOrder = 1;
 			Article
 				.find({})
 				.sort(sortOptions)
