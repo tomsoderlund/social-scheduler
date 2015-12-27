@@ -3,12 +3,13 @@
 Posts links to Buffer, analyses clicks, and improves itself.
 
 
-## Usage
-
-...
-
-
 ## How to Run
+
+### Schedule updates
+
+	node app/update.js
+
+### Web server for REST API
 
 Just start with:
 
@@ -61,7 +62,7 @@ Built on Node.js, Express (with EJS) and MongoDB.
 
 	# Set up and configure app
 	heroku create MYAPPNAME
-	heroku addons:add mongolab
+	heroku addons:create mongolab
 
 	# Settings
 	heroku config:set BUFFER_ACCESS_TOKEN=(token)
