@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var config = require('../config/config'),
 	glob = require('glob'),
 	mongoose = require('mongoose');
