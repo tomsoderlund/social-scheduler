@@ -39,7 +39,10 @@ module.exports = {
 		if (profile.service === 'twitter') {
 			update.text = update.title + '\n' + LINK_DUMMY;
 		}
-		update.text = update.text + '\n';
+		// Tags
+		if (update.tags.length > 0) {
+			update.text = update.text + '\n';
+		}
 		for (var t in update.tags) {
 			if (update.tags.hasOwnProperty(t)) {
 				update.text = appendTextIfThereIsSpace(update.text, '#'+update.tags[t], ' ', false);
