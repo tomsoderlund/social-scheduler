@@ -22,10 +22,10 @@ var updateDateLastUpdate = function (articles, profile, callback) {
 module.exports = {
 
 	getSuggestions: function (profile, limit, callback) {
-		console.log('getSuggestions', profile.service, limit);
+		//console.log('getSuggestions', profile.service, limit);
 		if (limit > 0) {
 			var sortOptions = {};
-			sortOptions['usage.' + profile.service + '.dateLastUpdate'] = -1;
+			sortOptions['usage.' + profile.service + '.dateLastUpdate'] = 1;
 			Article
 				.find({})
 				.sort(sortOptions)
@@ -39,6 +39,7 @@ module.exports = {
 				});
 		}
 		else {
+			console.log('Queue limit is exceeded for ' + profile.service);
 			callback(null, profile, []);
 		}
 	},
@@ -75,28 +76,20 @@ module.exports = {
 		});
 	},
 
-/*
-
 	read: function (req, res, next) {
-		if (req.query.password === API_PASSWORD) {
-
-			Thing.findById(req.params.id, function (err, thing) {
-				if (err) {
-					return res.json(400, err);
-				}
-				else {
-					return res.json(thing);
-				}
-			});
-		}
-		else {
-			return res.json(401, 'Unauthorized');
-		}
+		Article.findById(req.params.id, function (err, article) {
+			if (err) {
+				return res.json(400, err);
+			}
+			else {
+				return res.json(article);
+			}
+		});
 	},
 
-	// Update thing
+	// Update article
 	update: function (req, res, next) {
-		Thing.update(
+		Article.update(
 			{ _id: req.params.id },
 			req.body,
 			function (updateErr, numberAffected, rawResponse) {
@@ -104,40 +97,33 @@ module.exports = {
 					res.json(500, updateErr);
 				}
 				else {
-					res.json(200, 'Updated thing ' + req.params.id);
+					res.json(200, 'Updated article ' + req.params.id);
 				}
 			}
 		);
 	},
 
-	// Delete thing
+	// Delete article
 	delete: function (req, res, next) {
-		if (req.query.password === API_PASSWORD) {
-			var searchParams;
-			if (req.params.id === 'ALL') {
-				searchParams = {};
-			}
-			else {
-				searchParams = { _id: req.params.id }
-			}
-
-			Thing.remove(
-				searchParams,
-				function(thingErr, numberAffected, rawResponse) {
-					if (thingErr) {
-						res.json(500, thingErr);
-					}
-					else {
-						res.json(200, 'Deleted ' + numberAffected + ' things');
-					}
-				}
-			);
+		var searchParams;
+		if (req.params.id === 'ALL') {
+			searchParams = {};
 		}
 		else {
-			return res.json(401, 'Unauthorized');
+			searchParams = { _id: req.params.id }
 		}
-	}
 
-*/
+		Article.remove(
+			searchParams,
+			function(articleErr, numberAffected, rawResponse) {
+				if (articleErr) {
+					res.json(500, articleErr);
+				}
+				else {
+					res.json(200, 'Deleted ' + numberAffected + ' articles');
+				}
+			}
+		);
+	}
 
 }

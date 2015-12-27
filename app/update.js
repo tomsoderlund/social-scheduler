@@ -9,7 +9,7 @@ var profiles = require('./controllers/profiles');
 var articles = require('./controllers/articles');
 var updates = require('./controllers/updates');
 
-var QUEUE_LIMIT = 1;
+var SSS_QUEUE_LIMIT = process.env.SSS_QUEUE_LIMIT ? parseInt(process.env.SSS_QUEUE_LIMIT) : 1;
 
 
 
@@ -17,12 +17,12 @@ console.log('Smart Social Scheduler');
 
 var scheduleUpdatesForProfiles = function (profiles, callback) {
 	async.each(profiles, function (profile, cbEach) {
-		console.log('Profile:', profile.service, profile.id);
+		//console.log('scheduleUpdatesForProfiles:', profile.service, profile.id);
 		async.waterfall([
 				function (cbWaterfall) {
-					articles.getSuggestions(profile, QUEUE_LIMIT - profile.queueSize, cbWaterfall);
+					articles.getSuggestions(profile, SSS_QUEUE_LIMIT - profile.queueSize, cbWaterfall);
 				},
-				updates.postUpdates
+				updates.scheduleUpdates
 			],
 			cbEach
 		);
@@ -30,24 +30,16 @@ var scheduleUpdatesForProfiles = function (profiles, callback) {
 	callback)
 };
 
+// Main flow
 async.waterfall([
 		profiles.updateProfiles,
 		profiles.getProfiles,
 		scheduleUpdatesForProfiles
 	],
-	init.closeDatabase
+	function (err) {
+		if (err) {
+			console.error('SSS error:', err);
+		}
+		init.closeDatabase();
+	}
 );
-
-
-
-/*
-
-var func = function (err, data) {
-};
-
-Profile: twitter 52f668e51ad570307c000027
-Profile: facebook 52f669165f83d92355000037
-Profile: google 52f668b91ad5703e7700003a
-Profile: linkedin 5308e22ee4c1560b72000112
-*/
-

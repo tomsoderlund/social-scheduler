@@ -8,7 +8,7 @@ var Update = mongoose.model('Update');
 var Buffer = require('../../modules/buffer-api/src/buffer-api');
 var buffer = new Buffer(process.env.BUFFER_ACCESS_TOKEN);
 
-var DEBUG_MODE = true;
+var DEBUG_MODE = false; // true means no real Buffer posting
 
 module.exports = {
 
@@ -18,7 +18,7 @@ module.exports = {
 
 		var appendTextIfThereIsSpace = function (oldText, appendText, separator, appendFirst) {
 			// Link: 23 char, image 24
-			if (profile.service !== 'twitter' || (oldText.length + appendText.length <= 140)) {
+			if (profile.service !== 'twitter' || (oldText.length + appendText.length <= 116)) {
 				if (appendFirst)
 					oldText = appendText + separator + oldText;
 				else
@@ -50,8 +50,8 @@ module.exports = {
 		return update;
 	},
 
-	postUpdates: function (profile, updates, callback) {
-		console.log('postUpdates', profile.service, updates);
+	scheduleUpdates: function (profile, updates, callback) {
+		console.log('Schedule updates:', profile.service, _.pluck(updates, 'text'));
 
 		async.each(updates, function (update, cbEach) {
 			update.service = profile.service;

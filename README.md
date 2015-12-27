@@ -2,9 +2,11 @@
 
 Posts links to Buffer, analyses clicks, and improves itself.
 
+
 ## Usage
 
 ...
+
 
 ## How to Run
 
@@ -42,17 +44,26 @@ Delete all articles:
 	curl -X DELETE http://localhost:3009/api/articles/ALL?password=MYPASSWORD
 
 
+## Settings
+
+* SSS_QUEUE_LIMIT: 1-10 buffer queue size
+* SSS_PASSWORD: for API requests
+* BUFFER_ACCESS_TOKEN: for Buffer API
+
+
 ## Implementation
 
 Based on the [Yeoman Express generator](https://github.com/petecoop/generator-express) with the "MVC" option.
 Built on Node.js, Express (with EJS) and MongoDB.
+
 
 ## Deploying on Heroku
 
 	# Set up and configure app
 	heroku create MYAPPNAME
 	heroku addons:add mongolab
-	heroku config:set NODE_ENV=production
 
-	# Set password used in API requests
+	# Settings
+	heroku config:set BUFFER_ACCESS_TOKEN=(token)
 	heroku config:set SSS_PASSWORD=MYPASSWORD
+	heroku config:set SSS_QUEUE_LIMIT=3

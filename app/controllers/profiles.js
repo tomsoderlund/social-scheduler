@@ -18,16 +18,21 @@ module.exports = {
 
 	updateProfiles: function (callback) {
 		buffer.getProfileInfo(function (err, profiles) {
-			async.each(profiles, function (profile, cbEach) {
-				//console.log('Profile:', profile.service, profile.id);
-				var properties = {
-					bufferId: profile.id,
-					service: profile.service,
-					queueSize: profile.counts.pending
-				}
-				Profile.update({ bufferId: profile.id }, properties, { upsert: true }, cbEach);
-			},
-			callback)
+			if (!profiles.error) {
+				async.each(profiles, function (profile, cbEach) {
+					console.log('Profile:', profile.service, profile.id);
+					var properties = {
+						bufferId: profile.id,
+						service: profile.service,
+						queueSize: profile.counts.pending
+					}
+					Profile.update({ bufferId: profile.id }, properties, { upsert: true }, cbEach);
+				},
+				callback);
+			}
+			else {
+				callback(profiles.error, profiles);
+			}
 		});
 	},
 

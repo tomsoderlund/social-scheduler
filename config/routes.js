@@ -17,10 +17,10 @@ module.exports = function (app, config) {
 	var articlesController = require(config.root + '/app/controllers/articles');
 
 	router.get('/api/articles', authController.isAuthenticated, articlesController.list);
+	router.get('/api/articles/:id', authController.isAuthenticated, articlesController.read);
 	router.post('/api/articles', authController.isAuthenticated, articlesController.create);
-	// router.get('/api/articles/:id', authController.isAuthenticated, articlesController.read);
-	// router.put('/api/articles/:id', authController.isAuthenticated, articlesController.update);
-	// router.delete('/api/articles/:id', authController.isAuthenticated, articlesController.delete);
+	router.put('/api/articles/:id', authController.isAuthenticated, articlesController.update);
+	router.delete('/api/articles/:id', authController.isAuthenticated, articlesController.delete);
 
 	router.get('/', startController.index);
 
