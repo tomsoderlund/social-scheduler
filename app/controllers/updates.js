@@ -32,6 +32,7 @@ module.exports = {
 		update.url = article.url;
 		update.category = article.category;
 		update.title = article.titles[Math.floor(Math.random() * article.titles.length)];
+		update.originalTitle = article.titles[0];
 		update.image = article.images[Math.floor(Math.random() * article.images.length)];
 		update.tags = article.tags;
 		// Make text
@@ -70,7 +71,7 @@ module.exports = {
 							//thumbnail: 'https://pbs.twimg.com/media/CW0xoXbWsAA81ZG.jpg:large',
 							link: update.url,
 							picture: update.image,
-							title: update.title,
+							title: update.originalTitle,
 							// description: ,
 						},
 						now: false,

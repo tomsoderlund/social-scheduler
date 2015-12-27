@@ -14,7 +14,6 @@ var updates = require('./controllers/updates');
 var SSS_QUEUE_LIMIT = process.env.SSS_QUEUE_LIMIT ? parseInt(process.env.SSS_QUEUE_LIMIT) : 1;
 
 
-
 console.log('Smart Social Scheduler');
 
 var scheduleUpdatesForProfiles = function (profiles, callback) {
