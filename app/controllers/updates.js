@@ -10,6 +10,14 @@ var buffer = new Buffer(process.env.BUFFER_ACCESS_TOKEN);
 
 var DEBUG_MODE = false; // true means no real Buffer posting
 
+var isVideo = function (url) {
+	var fileExtension = url.substring(url.lastIndexOf('.')+1, url.length).toLowerCase();
+	if (fileExtension === 'mp4' || fileExtension === 'mov')
+		return true;
+	else
+		return false
+}
+
 module.exports = {
 
 	makeUpdateFromArticle: function (profile, article) {
@@ -60,32 +68,34 @@ module.exports = {
 		async.each(updates, function (update, cbEach) {
 			update.service = profile.service;
 
+			var bufferOptions = {
+				profile_ids: [profile.bufferId],
+				text: update.text,
+				media: {},
+				now: false,
+				attachment: true,
+				// shorten: false,
+				// top: false,
+				// scheduled_at: null,
+				// retweet: false,
+			};
+			bufferOptions.media.photo = update.image;
+			bufferOptions.media.link = update.url;
+			bufferOptions.media.picture = update.image;
+			bufferOptions.media.title = update.originalTitle;
+			//bufferOptions.media.description = ;
+			bufferOptions.media.thumbnail = update.image; // only for Buffer dashboard
+
 			if (!DEBUG_MODE) {
 				// Not debug mode
 				buffer.createUpdate(
-					{
-						profile_ids: [profile.bufferId],
-						text: update.text,
-						media: {
-							photo: update.image,
-							//thumbnail: 'https://pbs.twimg.com/media/CW0xoXbWsAA81ZG.jpg:large',
-							link: update.url,
-							picture: update.image,
-							title: update.originalTitle,
-							// description: ,
-						},
-						now: false,
-						attachment: true,
-						// shorten: false,
-						// top: false,
-						// scheduled_at: null,
-						// retweet: false,
-					},
+					bufferOptions,
 					function (errBuffer, results) {
 						if (!errBuffer) {
 							Update.create(update, cbEach);
 						}
 						else {
+							console.log('Buffer error:', errBuffer, results);
 							cbEach();
 						}
 					}
@@ -97,6 +107,16 @@ module.exports = {
 			}
 		},
 		callback)
+	},
+
+	getPendingUpdates: function (profile, callback) {
+		buffer.getPendingUpdates(
+			profile.bufferId,
+			function (errBuffer, results) {
+				console.log('getPendingUpdates', errBuffer, results, results.updates[0].media);
+				callback(errBuffer, results);
+			}
+		);
 	},
 
 }
