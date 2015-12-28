@@ -20,7 +20,7 @@ var testProfile = {
 
 var testArticle = {
 	"_id": "123",
-	"url": "https://s3-eu-west-1.amazonaws.com/weld-social-and-blog/video-loops/Font+searching.mov",
+	"url": "https://vimeo.com/145519711",
 	"titles": [
 		"This is a test post 2"
 	],
@@ -31,7 +31,7 @@ var testArticle = {
 		"testtag"
 	],
 	"images": [
-		"https://cdn-images-1.medium.com/max/1024/1*BgCJGJryezoqN0M9_ynj8w.png"
+		//"https://cdn-images-1.medium.com/max/1024/1*BgCJGJryezoqN0M9_ynj8w.png"
 	],
 }
 
@@ -39,7 +39,7 @@ var testUpdate = updates.makeUpdateFromArticle(testProfile, testArticle);
 
 console.log('Update:', testUpdate);
 
-//updates.scheduleUpdates(testProfile, [testUpdate], init.closeDatabase);
-updates.getPendingUpdates(testProfile, init.closeDatabase);
+//updates.getPendingUpdates(testProfile, init.closeDatabase);
+updates.scheduleUpdates(testProfile, [testUpdate], init.closeDatabase);
 
 //init.closeDatabase();
