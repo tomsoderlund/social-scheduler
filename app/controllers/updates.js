@@ -10,6 +10,7 @@ var buffer = new Buffer(process.env.BUFFER_ACCESS_TOKEN);
 
 var DEBUG_MODE = false; // true means no real Buffer posting
 
+
 var isVideo = function (url) {
 	var fileExtension = url.substring(url.lastIndexOf('.')+1, url.length).toLowerCase();
 	if (fileExtension === 'mp4' || fileExtension === 'mov')
@@ -17,6 +18,7 @@ var isVideo = function (url) {
 	else
 		return false
 }
+
 
 module.exports = {
 
@@ -41,7 +43,10 @@ module.exports = {
 		update.category = article.category;
 		update.title = article.titles[Math.floor(Math.random() * article.titles.length)];
 		update.originalTitle = article.titles[0];
-		update.image = article.images[Math.floor(Math.random() * article.images.length)];
+		// Only images in 3/4
+		if (Math.random() <= 0.75) {
+			update.image = article.images[Math.floor(Math.random() * article.images.length)];
+		}
 		update.tags = article.tags;
 		// Make text
 		update.text = update.title;
@@ -53,7 +58,7 @@ module.exports = {
 			update.text = update.text + '\n';
 		}
 		for (var t in update.tags) {
-			if (update.tags.hasOwnProperty(t)) {
+			if (update.tags.hasOwnProperty(t) && typeof(update.tags[t]) === 'string') {
 				update.text = appendTextIfThereIsSpace(update.text, '#'+update.tags[t], ' ', false);
 			}
 		}
@@ -113,7 +118,7 @@ module.exports = {
 		buffer.getPendingUpdates(
 			profile.bufferId,
 			function (errBuffer, results) {
-				console.log('getPendingUpdates', errBuffer, results, results.updates[0].media);
+				console.log('getPendingUpdates', errBuffer, results);
 				callback(errBuffer, results);
 			}
 		);
