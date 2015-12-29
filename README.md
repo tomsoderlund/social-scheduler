@@ -1,7 +1,8 @@
 # Smart Social Scheduler
 
-Posts links to Buffer, analyses clicks, and improves itself.
+Never run dry - keeps your social feeds loaded with your best content. Powered by [Buffer](https://www.buffer.com), and requires a Buffer account.
 
+![Smart Social Scheduler](example.png)
 
 ## How to Run
 
@@ -21,6 +22,14 @@ Just start with:
 
 Server will default to **http://localhost:3009**
 
+
+## Concepts
+
+These data are stored in the database:
+
+* **Articles**. This is what you input into the Smart Social Scheduler. Properties include a `url` (unique), arrays of `titles` and `images` that will be chosen randomly, and (hash)`tags` where all will be used if they fit.
+* **Updates**. These are time-stamped posts to your social accounts. Can be used for follow-up analytics.
+* **Profiles**. Social accounts e.g. for Twitter, Facebook, etc. Smart Social Scheduler will read your profiles from your Buffer account.
 
 ## API
 
@@ -47,9 +56,9 @@ Delete all articles:
 
 ## Settings
 
-* SSS_QUEUE_LIMIT: 1-10 buffer queue size
-* SSS_PASSWORD: for API requests
-* BUFFER_ACCESS_TOKEN: for Buffer API
+* **SSS_QUEUE_LIMIT**: 1-10 Buffer queue size.
+* **SSS_PASSWORD**: for use in API requests.
+* **BUFFER_ACCESS_TOKEN**: for Buffer API.
 
 
 ## Implementation
@@ -68,3 +77,5 @@ Built on Node.js, Express (with EJS) and MongoDB.
 	heroku config:set BUFFER_ACCESS_TOKEN=(token)
 	heroku config:set SSS_PASSWORD=MYPASSWORD
 	heroku config:set SSS_QUEUE_LIMIT=3
+
+Designed to be used with [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler).
