@@ -50,9 +50,9 @@ module.exports = {
 		update.tags = article.tags;
 		// Make text
 		update.text = update.title;
-		if (profile.service === 'twitter') {
+		//if (profile.service === 'twitter') {
 			update.text = update.title + '\n' + LINK_DUMMY;
-		}
+		//}
 		// Tags
 		if (update.tags.length > 0) {
 			update.text = update.text + '\n';

@@ -4,6 +4,7 @@ Never run dry - keeps your social feeds loaded with your best content. Powered b
 
 ![Smart Social Scheduler](example.png)
 
+
 ## How to Run
 
 ### Schedule updates
