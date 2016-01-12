@@ -50,6 +50,7 @@ module.exports = {
 		update.tags = article.tags;
 		// Make text
 		update.text = update.title;
+		// TEMP: remove Media options for Buffer bug
 		//if (profile.service === 'twitter') {
 			update.text = update.title + '\n' + LINK_DUMMY;
 		//}
@@ -84,12 +85,13 @@ module.exports = {
 				// scheduled_at: null,
 				// retweet: false,
 			};
-			bufferOptions.media.photo = update.image;
-			bufferOptions.media.link = update.url;
-			bufferOptions.media.picture = update.image;
-			bufferOptions.media.title = update.originalTitle;
-			//bufferOptions.media.description = ;
-			bufferOptions.media.thumbnail = update.image; // only for Buffer dashboard
+			// TEMP: remove Media options for Buffer bug
+			// bufferOptions.media.photo = update.image;
+			// bufferOptions.media.link = update.url;
+			// bufferOptions.media.picture = update.image;
+			// bufferOptions.media.title = update.originalTitle;
+			// //bufferOptions.media.description = ;
+			// bufferOptions.media.thumbnail = update.image; // only for Buffer dashboard
 
 			if (!DEBUG_MODE) {
 				// Not debug mode

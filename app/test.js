@@ -12,10 +12,9 @@ var updates = require('./controllers/updates');
 console.log('Test');
 
 var testProfile = {
-	"bufferId": "5317236f168f20f9210000f5",
-	"service": "twitter"
-	// "bufferId": "52f669165f83d92355000037",
-	// "service": "facebook"
+	// "service": "twitter", "bufferId": "5317236f168f20f9210000f5", // Weld
+	// "service": "facebook", "bufferId": "52f669165f83d92355000037", // Weld
+	"service": "facebook", "bufferId": "532865f15a05ad1b1f5c32e5", // Tom
 };
 
 var testArticle = {
