@@ -21,7 +21,7 @@ var testArticle = {
 	"_id": "123",
 	"url": "https://vimeo.com/145519711",
 	"titles": [
-		"This is a test post 2"
+		"This is a test post " + new Date()
 	],
 	"category": "article",
 	"randomOrder": 252,

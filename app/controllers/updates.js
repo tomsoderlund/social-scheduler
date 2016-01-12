@@ -86,13 +86,13 @@ module.exports = {
 				// retweet: false,
 			};
 			bufferOptions.media.photo = update.image;
+			bufferOptions.media.thumbnail = update.image; // only for Buffer dashboard
 
 			// TEMP: remove Media options for Buffer bug
 			// bufferOptions.media.link = update.url;
 			// bufferOptions.media.picture = update.image;
 			// bufferOptions.media.title = update.originalTitle;
 			// //bufferOptions.media.description = ;
-			// bufferOptions.media.thumbnail = update.image; // only for Buffer dashboard
 
 			if (!DEBUG_MODE) {
 				// Not debug mode
