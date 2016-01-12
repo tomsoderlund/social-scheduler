@@ -30,7 +30,7 @@ var testArticle = {
 		"testtag"
 	],
 	"images": [
-		//"https://cdn-images-1.medium.com/max/1024/1*BgCJGJryezoqN0M9_ynj8w.png"
+		"https://cdn-images-1.medium.com/max/1024/1*BgCJGJryezoqN0M9_ynj8w.png"
 	],
 }
 

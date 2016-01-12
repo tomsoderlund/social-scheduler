@@ -85,8 +85,9 @@ module.exports = {
 				// scheduled_at: null,
 				// retweet: false,
 			};
+			bufferOptions.media.photo = update.image;
+
 			// TEMP: remove Media options for Buffer bug
-			// bufferOptions.media.photo = update.image;
 			// bufferOptions.media.link = update.url;
 			// bufferOptions.media.picture = update.image;
 			// bufferOptions.media.title = update.originalTitle;
