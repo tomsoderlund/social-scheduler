@@ -56,6 +56,19 @@ body {
 	align-items: center;	
 }
 
+// Phone
+@media (max-width: 550px) {
+	.article {
+		.images,
+		.titles {
+			flex-direction: column;
+		}
+	}
+	.article-and-buttons {
+		display: block;
+	}
+}
+
 hr {
 	border-top: 1px solid #9b4dca;
 }
@@ -93,4 +106,29 @@ button {
 	right: 1em;
 	top: 1em;
 	width: 10em;
+}
+
+.flash-message {
+	position: fixed;
+	z-index: 1000;
+	width: 50%;
+	min-width: 300px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-color: rgba(0,0,0, 0.5);
+	color: white;
+	text-align: center;
+	font-size: 0.8em;
+	padding: 0.5em;
+	border-radius: 0.5em;
+
+	transition: all 0.25s;
+	top: -40px;
+	opacity: 0;
+
+	&.active {
+		opacity: 1;
+		top: 0;
+	}
 }

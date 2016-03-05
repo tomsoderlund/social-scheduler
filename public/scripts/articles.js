@@ -19,7 +19,7 @@ app.factory('Article', function ($resource) {
 
 });
 
-app.controller('ArticlesCtrl', function ($scope, Article, $cookies) {
+app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 
 	$scope.categories = [
 		{ id: 'article', name: 'Blog article' },
@@ -36,7 +36,7 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies) {
 		{ id: 'external', name: 'External site' },
 	];
 
-	$scope.searchArticles = function () {
+	$scope.searchArticles = function (suppressFlash) {
 		Article.query(
 			{
 				password: $scope.password,
@@ -44,6 +44,8 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies) {
 			},
 			function (articles) {
 				$scope.articles = articles;
+				if (!suppressFlash)
+					$scope.showFlashMessage('Found ' + articles.length + ' articles.');
 			},
 			function (error) {
 				console.log('error', error);
@@ -54,18 +56,38 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies) {
 	$scope.article = new Article();
 
 	$scope.createArticle = function () {
-		Article.save({ password: $scope.password }, $scope.article, function (res) {
-			console.log('Saved', res);
-			$scope.article = new Article();
-		})
+		Article.save({ password: $scope.password }, $scope.article,
+			function (createdArticle) {
+				$scope.showFlashMessage('Created new article “' + createdArticle.url + '”.');
+				$scope.article = new Article();
+			},
+			function (err) {
+				console.log('Error:', err);
+			}
+		)
 	};
 
 	$scope.updateArticle = function (article) {
-		Article.update({ password: $scope.password }, article, function (res) {
-			console.log('Updated', res);
-		}, function (err) {
-			console.log('Err', err);
-		});
+		Article.update({ password: $scope.password }, article,
+			function (updatedArticle) {
+				$scope.showFlashMessage('Article “' + article.url + '” updated.');
+			},
+			function (err) {
+				console.log('Error:', err);
+			}
+		);
+	};
+
+	$scope.deleteArticle = function (article) {
+		Article.delete({ password: $scope.password }, article,
+			function (updatedArticle) {
+				$scope.showFlashMessage('Article “' + article.url + '” deleted.');
+				$scope.searchArticles(true);
+			},
+			function (err) {
+				console.log('Error:', err);
+			}
+		);
 	};
 
 	$scope.addArrayItem = function (array) {
@@ -84,6 +106,13 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies) {
 			return 'yellow';
 		else
 			return 'green';
+	};
+
+	$scope.showFlashMessage = function (textStr, category) {
+		$scope.flashMessage = textStr;
+		$timeout(function () {
+			$scope.flashMessage = null;
+		}, 5000);
 	};
 
 	$scope.password = $cookies.get('sssPassword');

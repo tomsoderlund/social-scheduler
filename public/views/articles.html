@@ -1,3 +1,5 @@
+<div class="flash-message" ng-class="{ active: flashMessage }">{{ flashMessage }}</div>
+
 <button class="settings-button" type="button" ng-click="showSettings = !showSettings" ng-class="{ 'button-outline': !showSettings }">Settings</button>
 
 <div class="container settings" ng-show="showSettings">
@@ -16,6 +18,7 @@
 	<h2>Articles</h2>
 	<form ng-submit="searchArticles()">
 		<input placeholder="Search" ng-model="searchText"></input>
+		<button type="submit">Search</button>
 	</form>
 	<div class="row article-and-buttons" ng-repeat="article in articles">
 		<div ng-include="'views/article_form.html'"></div>
