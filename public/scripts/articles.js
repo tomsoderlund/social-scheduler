@@ -90,8 +90,9 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 		);
 	};
 
-	$scope.addArrayItem = function (array) {
-		array.push('');
+	$scope.addArrayItem = function (article, arrayName) {
+		article[arrayName] = article[arrayName] || [];
+		article[arrayName].push('');
 	};
 
 	$scope.setPassword = function (pw) {

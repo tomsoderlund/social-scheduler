@@ -2,17 +2,17 @@
 	<input placeholder="URL" ng-model="article.url"></input>
 	<div class="article-details">
 		<div class="images">
-			<div class="image" ng-repeat="imageUrl in article.images">
-				<img ng-src="{{article.images[$index]}}" alt="Image">
-				<input placeholder="Image URL" ng-model="article.images[$index]"></input>
+			<div class="image" ng-repeat="(imageKey, imageUrl) in article.images track by imageKey">
+				<img ng-src="{{article.images[imageKey]}}" alt="Image">
+				<input placeholder="Image URL" ng-model="article.images[imageKey]"></input>
 			</div>
-			<button class="button-add" type="button" ng-click="addArrayItem(article.images)">+Image</button>
+			<button class="button-add" type="button" ng-click="addArrayItem(article, 'images')">+Image</button>
 		</div>
 		<div class="titles">
-			<div class="title" ng-repeat="title in article.titles">
-				<textarea ng-model="article.titles[$index]" ng-class="[getTextWarning(article.titles[$index])]"></textarea>
+			<div class="title" ng-repeat="(titleKey, title) in article.titles track by titleKey">
+				<textarea ng-model="article.titles[titleKey]" ng-class="[getTextWarning(article.titles[titleKey])]"></textarea>
 			</div>
-			<button class="button-add" type="button" ng-click="addArrayItem(article.titles)">+Title</button>
+			<button class="button-add" type="button" ng-click="addArrayItem(article, 'titles')">+Title</button>
 		</div>
 	</div>
 	<input placeholder="Hashtag1,Hashtag2" ng-model="article.tags"></input>
