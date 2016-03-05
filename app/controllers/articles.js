@@ -49,10 +49,12 @@ module.exports = {
 
 	list: function (req, res, next) {
 		var searchQuery = {};
-		// if (req.query.from) {
-		// 	var currentTime = new Date();
-		// 	searchQuery = { dateCreated: { "$gte": new Date(req.query.from), "$lt": currentTime } };
-		// }
+		if (req.query.search) {
+			searchQuery.$or = [
+				{ url: new RegExp(req.query.search, 'gi') },
+				{ titles: new RegExp(req.query.search, 'gi') },
+			];
+		}
 
 		Article.find(searchQuery, null, { sort: {dateCreated: -1} }, function (err, articles) {
 			if (err) {

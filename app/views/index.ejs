@@ -1,7 +1,28 @@
-<% include header %>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width">
+<title><%- title %></title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
+<link rel="stylesheet" href="/bower_components/milligram/dist/milligram.min.css">
+<link rel="stylesheet" href="/styles/style.css">
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="/scripts/app.js"></script>
+<script src="/scripts/articles.js"></script>
+</head>
+
+<body ng-app="socialSchedulerApp">
 
 <h1><%- title %></h1>
 
-<p>Description...</p>
+<div ng-view></div>
 
-<% include footer %>
+</body>
+
+</html>
