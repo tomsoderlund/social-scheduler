@@ -5,5 +5,12 @@
     "**/.*",
     "node_modules",
     "components"
-  ]
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "angular-resource": "^1.5.0",
+    "angular-cookies": "^1.5.0",
+    "milligram": "^1.1.0"
+  }
 }
