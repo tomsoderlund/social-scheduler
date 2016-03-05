@@ -1,0 +1,23 @@
+<div class="article">
+	<input placeholder="URL" ng-model="article.url"></input>
+	<div class="article-details">
+		<div class="images">
+			<div class="image" ng-repeat="imageUrl in article.images">
+				<img ng-src="{{article.images[$index]}}" alt="Image">
+				<input placeholder="Image URL" ng-model="article.images[$index]"></input>
+			</div>
+			<button class="button-add" type="button" ng-click="addArrayItem(article.images)">+Image</button>
+		</div>
+		<div class="titles">
+			<div class="title" ng-repeat="title in article.titles">
+				<textarea ng-model="article.titles[$index]" ng-class="[getTextWarning(article.titles[$index])]"></textarea>
+			</div>
+			<button class="button-add" type="button" ng-click="addArrayItem(article.titles)">+Title</button>
+		</div>
+	</div>
+	<input placeholder="Hashtag1,Hashtag2" ng-model="article.tags"></input>
+	<select ng-model="article.category">
+		<option ng-repeat="category in categories track by category.id" value="{{category.id}}">{{category.name}}</option>
+	</select>
+	<input placeholder="Date" ng-model="article.dateCreated"></input>	
+</div>
