@@ -55,7 +55,23 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 
 	$scope.article = new Article();
 
+	var fixArticleBeforeSave = function (article) {
+		if (typeof(article.tags) === 'string') {
+			article.tags = article.tags.split(',');
+		}
+		for (var i = article.images.length - 1; i >= 0; i--) {
+			if (article.images[i] === '')
+				article.images.splice(i, 1);
+		}
+		for (var t = article.titles.length - 1; t >= 0; t--) {
+			if (article.titles[t] === '')
+				article.titles.splice(t, 1);
+		}
+		return article;
+	};
+
 	$scope.createArticle = function () {
+		$scope.article = fixArticleBeforeSave($scope.article);
 		Article.save({ password: $scope.password }, $scope.article,
 			function (createdArticle) {
 				$scope.showFlashMessage('Created new article “' + createdArticle.url + '”.');
@@ -69,6 +85,7 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	};
 
 	$scope.updateArticle = function (article) {
+		article = fixArticleBeforeSave(article);
 		Article.update({ password: $scope.password }, article,
 			function (updatedArticle) {
 				$scope.showFlashMessage('Article “' + article.url + '” updated.');
@@ -99,16 +116,15 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	};
 
 	$scope.setPassword = function (pw) {
-		console.log('ADFAS')
 		$cookies.put('sssPassword', pw);
 		$scope.showFlashMessage('Server password set.');
 		$scope.searchArticles(true);
 	};
 
 	$scope.getTextWarning = function (textStr) {
-		if (textStr.length > 116)
+		if (textStr && textStr.length > 116)
 			return 'red';
-		else if (textStr.length > 100)
+		else if (textStr && textStr.length > 100)
 			return 'yellow';
 		else
 			return 'green';
