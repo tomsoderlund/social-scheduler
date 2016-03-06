@@ -54,9 +54,8 @@ module.exports = {
 			update.text = update.title + '\n' + LINK_DUMMY;
 		//}
 		// Tags
-		if (typeof(update.tags) === 'string') {
-			// My damn bug, dirty fix
-			update.tags = update.tags.split(',');
+		if (update.tags.length === 1 && update.tags[0].indexOf(',') !== -1) {
+			update.tags = update.tags[0].split(',');
 		}
 		update.tags = _.shuffle(article.tags);
 		if (update.tags.length > 0) {
