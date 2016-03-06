@@ -47,7 +47,6 @@ module.exports = {
 		if (Math.random() <= 0.75) {
 			update.image = article.images[Math.floor(Math.random() * article.images.length)];
 		}
-		update.tags = article.tags;
 		// Make text
 		update.text = update.title;
 		// TEMP: remove Media options for Buffer bug
@@ -55,6 +54,7 @@ module.exports = {
 			update.text = update.title + '\n' + LINK_DUMMY;
 		//}
 		// Tags
+		update.tags = _.shuffle(article.tags);
 		if (update.tags.length > 0) {
 			update.text = update.text + '\n';
 		}
