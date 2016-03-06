@@ -56,8 +56,8 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	$scope.article = new Article();
 
 	var fixArticleBeforeSave = function (article) {
-		if (typeof(article.tags) === 'string') {
-			article.tags = article.tags.split(',');
+		if (article.tags.length === 1 && article.tags[0].indexOf(',') !== -1) {
+			article.tags = article.tags[0].split(',');
 		}
 		for (var i = article.images.length - 1; i >= 0; i--) {
 			if (article.images[i] === '')
