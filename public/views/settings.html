@@ -1,0 +1,7 @@
+<div class="flash-message" ng-class="{ active: flashMessage }">{{ flashMessage }}</div>
+
+<div class="container settings">
+	<h2>Settings</h2>
+	<input placeholder="Password" type="password" ng-model="password"></input>
+	<button type="button" ng-click="setPassword(password)">Set password</button>
+</div>

@@ -62,6 +62,7 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 				$scope.article = new Article();
 			},
 			function (err) {
+				$scope.showFlashMessage('Error: ' + err.statusText + ' - duplicate?');
 				console.log('Error:', err);
 			}
 		)
@@ -73,6 +74,7 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 				$scope.showFlashMessage('Article “' + article.url + '” updated.');
 			},
 			function (err) {
+				$scope.showFlashMessage('Error: ' + err.statusText);
 				console.log('Error:', err);
 			}
 		);
@@ -85,6 +87,7 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 				$scope.searchArticles(true);
 			},
 			function (err) {
+				$scope.showFlashMessage('Error: ' + err.statusText);
 				console.log('Error:', err);
 			}
 		);
@@ -96,8 +99,10 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	};
 
 	$scope.setPassword = function (pw) {
+		console.log('ADFAS')
 		$cookies.put('sssPassword', pw);
-		$scope.searchArticles();
+		$scope.showFlashMessage('Server password set.');
+		$scope.searchArticles(true);
 	};
 
 	$scope.getTextWarning = function (textStr) {

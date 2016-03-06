@@ -14,8 +14,9 @@ app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
 
 	// Home
-	.when("/", { templateUrl: "views/articles.html", controller: "ArticlesCtrl"})
-	.when("/test", { templateUrl: "views/articles.html", controller: "ArticlesCtrl"})
+	.when("/", { templateUrl: "views/article_list.html", controller: "ArticlesCtrl"})
+	.when("/new", { templateUrl: "views/article_new.html", controller: "ArticlesCtrl"})
+	.when("/settings", { templateUrl: "views/settings.html", controller: "ArticlesCtrl"})
 
 	// // Pages
 	// .when("/about", { templateUrl: "views/about.html", controller: "PageCtrl"})

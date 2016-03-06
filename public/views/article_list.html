@@ -1,21 +1,7 @@
 <div class="flash-message" ng-class="{ active: flashMessage }">{{ flashMessage }}</div>
 
-<button class="settings-button" type="button" ng-click="showSettings = !showSettings" ng-class="{ 'button-outline': !showSettings }">Settings</button>
-
-<div class="container settings" ng-show="showSettings">
-	<h2>Settings</h2>
-	<input placeholder="Password" type="password" ng-model="password"></input>
-	<button type="button" ng-click="setPassword(password)">Set password</button>
-</div>
-
-<div class="container new-article">
-	<h2>New article</h2>
-	<div ng-include="'views/article_form.html'"></div>
-	<button type="button" ng-click="createArticle()">Create</button>
-</div>
-
 <div class="container articles">
-	<h2>Articles</h2>
+	<h2>Search articles</h2>
 	<form ng-submit="searchArticles()">
 		<input placeholder="Search" ng-model="searchText"></input>
 		<button type="submit">Search</button>
