@@ -54,10 +54,12 @@ module.exports = {
 			update.text = update.title + '\n' + LINK_DUMMY;
 		//}
 		// Tags
+		update.tags = article.tags;
 		if (update.tags && update.tags.length === 1 && update.tags[0].indexOf(',') !== -1) {
 			update.tags = update.tags[0].split(',');
 		}
-		update.tags = _.shuffle(article.tags);
+		// Randomize order
+		update.tags = _.shuffle(update.tags);
 		if (update.tags.length > 0) {
 			update.text = update.text + '\n';
 		}

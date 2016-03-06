@@ -79,4 +79,6 @@ Built on Node.js, Express (with EJS) and MongoDB.
 	heroku config:set SSS_PASSWORD=MYPASSWORD
 	heroku config:set SSS_QUEUE_LIMIT=3
 
-Designed to be used with [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler).
+Designed to be used with [Heroku Scheduler](https://devcenter.heroku.com/articles/scheduler), but can also be triggered manually:
+
+	heroku run node app/update.js

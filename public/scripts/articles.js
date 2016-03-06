@@ -56,16 +56,20 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	$scope.article = new Article();
 
 	var fixArticleBeforeSave = function (article) {
-		if (article.tags.length === 1 && article.tags[0].indexOf(',') !== -1) {
+		if (article.tags && article.tags.length === 1 && article.tags[0].indexOf(',') !== -1) {
 			article.tags = article.tags[0].split(',');
 		}
-		for (var i = article.images.length - 1; i >= 0; i--) {
-			if (article.images[i] === '')
-				article.images.splice(i, 1);
+		if (article.images) {
+			for (var i = article.images.length - 1; i >= 0; i--) {
+				if (article.images[i] === '')
+					article.images.splice(i, 1);
+			}
 		}
-		for (var t = article.titles.length - 1; t >= 0; t--) {
-			if (article.titles[t] === '')
-				article.titles.splice(t, 1);
+		if (article.titles) {
+			for (var t = article.titles.length - 1; t >= 0; t--) {
+				if (article.titles[t] === '')
+					article.titles.splice(t, 1);
+			}
 		}
 		return article;
 	};
