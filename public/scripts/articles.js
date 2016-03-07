@@ -47,8 +47,9 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 				if (!suppressFlash)
 					$scope.showFlashMessage('Found ' + articles.length + ' articles.');
 			},
-			function (error) {
-				console.log('error', error);
+			function (err) {
+				$scope.showFlashMessage('Error: ' + err.statusText);
+				console.log('Error:', err);
 			}
 		);
 	};
@@ -120,9 +121,8 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	};
 
 	$scope.setPassword = function (pw) {
-		$cookies.put('sssPassword', pw);
+		$cookies.put('sssPassword', pw, { expires: new Date((new Date()).getTime() + 365*24*60*60*1000) });
 		$scope.showFlashMessage('Server password set.');
-		$scope.searchArticles(true);
 	};
 
 	$scope.getTextWarning = function (textStr) {
