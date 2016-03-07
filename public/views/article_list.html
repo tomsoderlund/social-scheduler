@@ -1,16 +1,16 @@
 <div class="flash-message" ng-class="{ active: flashMessage }">{{ flashMessage }}</div>
 
-<div class="container articles">
+<div class="articles">
 	<h2>Search articles</h2>
 	<form ng-submit="searchArticles()">
 		<input placeholder="Search" ng-model="searchText"></input>
 		<button type="submit">Search</button>
 	</form>
-	<div class="row article-and-buttons" ng-repeat="article in articles">
-		<div ng-include="'views/article_form.html'"></div>
+	<div class="article-and-buttons" ng-repeat="article in articles">
+		<div ng-include="'views/article_form.html'" class="article"></div>
 		<div class="action-buttons">
 			<button type="button" ng-click="updateArticle(article)">Update</button>
-			<button type="button" ng-click="deleteArticle(article)">Delete</button>
+			<button type="button" class="button-outline" ng-click="deleteArticle(article)">Delete</button>
 		</div>
 		<hr>
 	</div>

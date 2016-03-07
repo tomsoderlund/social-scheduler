@@ -1,23 +1,21 @@
-<div class="article">
-	<input placeholder="URL" ng-model="article.url"></input>
-	<div class="article-details">
-		<div class="images">
-			<div class="image" ng-repeat="(imageKey, imageUrl) in article.images track by imageKey">
-				<img ng-src="{{article.images[imageKey]}}" alt="Image">
-				<input placeholder="Image URL" ng-model="article.images[imageKey]"></input>
-			</div>
-			<button class="button-add" type="button" ng-click="addArrayItem(article, 'images')">+Image</button>
+<input placeholder="URL" ng-model="article.url"></input>
+<div class="article-details">
+	<div class="images">
+		<div class="image" ng-repeat="(imageKey, imageUrl) in article.images track by imageKey">
+			<img ng-src="{{article.images[imageKey]}}" alt="Image">
+			<input placeholder="Image URL" ng-model="article.images[imageKey]"></input>
 		</div>
-		<div class="titles">
-			<div class="title" ng-repeat="(titleKey, title) in article.titles track by titleKey">
-				<textarea ng-model="article.titles[titleKey]" ng-class="[getTextWarning(article.titles[titleKey])]"></textarea>
-			</div>
-			<button class="button-add" type="button" ng-click="addArrayItem(article, 'titles')">+Title</button>
-		</div>
+		<button class="button-add" type="button" ng-click="addArrayItem(article, 'images')">+Image</button>
 	</div>
-	<input placeholder="Hashtag1,Hashtag2" ng-model="article.tags"></input>
-	<select ng-model="article.category">
-		<option ng-repeat="category in categories track by category.id" value="{{category.id}}">{{category.name}}</option>
-	</select>
-	<input placeholder="Date" ng-model="article.dateCreated"></input>	
+	<div class="titles">
+		<div class="title" ng-repeat="(titleKey, title) in article.titles track by titleKey">
+			<textarea ng-model="article.titles[titleKey]" ng-class="[getTextWarning(article.titles[titleKey])]"></textarea>
+		</div>
+		<button class="button-add" type="button" ng-click="addArrayItem(article, 'titles')">+Title</button>
+	</div>
 </div>
+<input placeholder="Hashtag1,Hashtag2" ng-model="article.tags"></input>
+<select ng-model="article.category">
+	<option ng-repeat="category in categories track by category.id" value="{{category.id}}">{{category.name}}</option>
+</select>
+<input placeholder="Date" ng-model="article.dateCreated"></input>
