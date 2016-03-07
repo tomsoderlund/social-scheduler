@@ -1,11 +1,13 @@
 <div class="flash-message" ng-class="{ active: flashMessage }">{{ flashMessage }}</div>
 
 <div class="articles">
+
 	<h2>Search articles</h2>
 	<form ng-submit="searchArticles()">
 		<input placeholder="Search" ng-model="searchText"></input>
 		<button type="submit">Search</button>
 	</form>
+
 	<div class="article-and-buttons" ng-repeat="article in articles">
 		<div ng-include="'views/article_form.html'" class="article"></div>
 		<div class="action-buttons">
@@ -14,4 +16,5 @@
 		</div>
 		<hr>
 	</div>
+
 </div>
