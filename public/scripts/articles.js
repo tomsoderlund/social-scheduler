@@ -103,16 +103,24 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 	};
 
 	$scope.deleteArticle = function (article) {
-		Article.delete({ password: $scope.password }, article,
-			function (updatedArticle) {
-				$scope.showFlashMessage('Article “' + article.url + '” deleted.');
-				$scope.searchArticles(true);
-			},
-			function (err) {
-				$scope.showFlashMessage('Error: ' + err.statusText);
-				console.log('Error:', err);
-			}
-		);
+		if (confirm('Are you sure you want to delete “' + article.url + '”?')) {
+			Article.delete({ password: $scope.password }, article,
+				function (updatedArticle) {
+					$scope.showFlashMessage('Article “' + article.url + '” deleted.');
+					$scope.searchArticles(true);
+				},
+				function (err) {
+					$scope.showFlashMessage('Error: ' + err.statusText);
+					console.log('Error:', err);
+				}
+			);
+		}
+	};
+
+	$scope.clearUsage = function (article) {
+		if (confirm('Clear usage data for “' + article.url + '”?')) {
+			article.usage = null;
+		}
 	};
 
 	$scope.addArrayItem = function (article, arrayName) {

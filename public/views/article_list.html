@@ -10,6 +10,11 @@
 
 	<div class="article-and-buttons" ng-repeat="article in articles">
 		<div ng-include="'views/article_form.html'" class="article"></div>
+		<div class="article-usage" ng-click="clearUsage(article)" ng-show="article.usage">
+			<div>
+				<span ng-repeat="(serviceId,serviceInfo) in article.usage">{{ serviceId }}: {{ serviceInfo.dateLastUpdate | date:'yyyy-MM-dd' }}</span>
+			</div>
+		</div>
 		<div class="action-buttons">
 			<button type="button" ng-click="updateArticle(article)">Update</button>
 			<button type="button" class="button-outline" ng-click="deleteArticle(article)">Delete</button>

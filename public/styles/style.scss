@@ -1,9 +1,71 @@
+$color_main: #9b4dca;
+$color_navigation: #f4f5f6;
+$color_borders: #d1d1d1;
+
 body {
 	padding: 1em;
 }
 
-.articles {
+nav {
+	position: fixed;
+	z-index: 500;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 60px;
+    background: $color_navigation;
+    border-bottom: 1px solid $color_borders;
+	color: $color_main;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5em;
+
+	h1 {
+		font-size: 1.5rem;
+		letter-spacing: 0.1rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	.button, button {
+		margin: 0;
+	}
+
 }
+
+.flash-message {
+	position: fixed;
+	z-index: 1000;
+	width: 50%;
+	min-width: 300px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-color: rgba(0,0,0, 0.5);
+	color: white;
+	text-align: center;
+	font-size: 0.8em;
+	padding: 0.5em;
+	border-radius: 0.5em;
+
+	transition: all 0.25s;
+	top: -40px;
+	opacity: 0;
+
+	&.active {
+		opacity: 1;
+		top: 0;
+	}
+}
+
+h2 {
+	margin-top: 60px;
+}
+
+//-----------------------------------
 
 .article {
 	display: flex;
@@ -40,15 +102,25 @@ body {
 			object-fit: contain;
 		}
 	}
-	.titles {
-		
-	}
 
 	.button-add {
 		flex: 1;
 		max-width: 15em;
 	}
 
+}
+
+.article-usage {
+	background: $color_borders;
+	padding: 0.5em;
+	font-size: 0.8em;
+	border-radius: 0.2em;
+	margin: 0.5em 0;
+	cursor: pointer;
+
+	span {
+		margin-right: 0.5em;
+	}
 }
 
 .article-and-buttons {
@@ -103,7 +175,7 @@ textarea {
 	background-color: white;
 	outline: none;
 	border-radius: 0.2em;
-	border: 1px solid lightgray;
+	border: 1px solid $color_borders;
 	padding: 0.5em;
 	margin: 0.5em 0;
 
@@ -117,65 +189,4 @@ textarea {
 
 button {
 	width: 100%;
-}
-
-.flash-message {
-	position: fixed;
-	z-index: 1000;
-	width: 50%;
-	min-width: 300px;
-	left: 0;
-	right: 0;
-	margin: auto;
-	background-color: rgba(0,0,0, 0.5);
-	color: white;
-	text-align: center;
-	font-size: 0.8em;
-	padding: 0.5em;
-	border-radius: 0.5em;
-
-	transition: all 0.25s;
-	top: -40px;
-	opacity: 0;
-
-	&.active {
-		opacity: 1;
-		top: 0;
-	}
-}
-
-$color_main: #9b4dca;
-
-nav {
-	position: fixed;
-	z-index: 500;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 60px;
-    background: #f4f5f6;
-    border-bottom: 1px solid #d1d1d1;
-	color: $color_main;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	padding: 0.5em;
-
-	h1 {
-		font-size: 1.5rem;
-		letter-spacing: 0.1rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		margin: 0;
-	}
-
-	.button, button {
-		margin: 0;
-	}
-
-}
-
-.container {
-	margin-top: 60px;
 }

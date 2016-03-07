@@ -1,6 +1,6 @@
-<nav>
+<nav ng-controller="NavigationCtrl">
 	<h1>Smart Social Scheduler</h1>
-	<a class="button" ng-href="#/" ng-class="{ 'button-outline': !showSettings }">Articles</a>	
-	<a class="button" ng-href="#/new" ng-class="{ 'button-outline': !showSettings }">New</a>	
-	<a class="button" ng-href="#/settings" ng-class="{ 'button-outline': !showSettings }">Settings</a>	
+	<a class="button" ng-href="#/" ng-class="{ 'button-outline': !isMenuActive('/') }">Articles</a>	
+	<a class="button" ng-href="#/new" ng-class="{ 'button-outline': !isMenuActive('/new') }">New</a>	
+	<a class="button" ng-href="#/settings" ng-class="{ 'button-outline': !isMenuActive('/settings') }">Settings</a>	
 </nav>

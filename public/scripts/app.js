@@ -31,3 +31,12 @@ app.config(['$routeProvider', function ($routeProvider) {
 	// .otherwise("/404", { templateUrl: "views/404.html", controller: "PageCtrl"});
 
 }]);
+
+
+app.controller('NavigationCtrl', function ($scope, $location) {
+
+	$scope.isMenuActive = function (path) {
+		return $location.path() === path;
+	};
+
+});
