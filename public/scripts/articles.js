@@ -30,10 +30,12 @@ app.controller('ArticlesCtrl', function ($scope, Article, $cookies, $timeout) {
 		{ id: 'example', name: 'Example' },
 		{ id: 'userquote', name: 'User quote' },
 		{ id: 'commercial', name: 'Commercial offering' },
+		{ id: 'media', name: 'Press/media' },
 		{ id: 'podcast', name: 'Podcast' },
 		{ id: 'tech', name: 'Tech article' },
 		{ id: 'weld-site', name: 'Weld site' },
 		{ id: 'external', name: 'External site' },
+		{ id: 'other', name: '(other)' },
 	];
 
 	$scope.searchArticles = function (suppressFlash) {
