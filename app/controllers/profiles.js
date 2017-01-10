@@ -11,7 +11,9 @@ var buffer = new Buffer(process.env.BUFFER_ACCESS_TOKEN);
 module.exports = {
 
 	getProfiles: function (callback) {
-		Profile.find({}, function (errFind, data) {
+		var query = { active: { $ne: false } };
+		Profile.find(query, function (errFind, data) {
+			console.log('Profiles found:', data);
 			callback(errFind, data);
 		});
 	},
