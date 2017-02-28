@@ -2,8 +2,14 @@
 
 Never run dry - keeps your social feeds loaded with your best content. Powered by [Buffer](https://www.buffer.com), and requires a Buffer account.
 
-![Smart Social Scheduler](example.png)
+Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=github-social-scheduler)), the code-free app and web creation tool:
 
+[![Weld](https://s3-eu-west-1.amazonaws.com/weld-social-and-blog/gif/weld_explained.gif)](https://www.weld.io?utm_source=github-social-scheduler)
+
+
+## Screenshot
+
+![Smart Social Scheduler](example.png)
 
 ## How to Run
 
